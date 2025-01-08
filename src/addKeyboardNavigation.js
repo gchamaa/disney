@@ -7,16 +7,17 @@ export function addKeyboardNavigation(){
     let activeCol = 0;
 
     let lastPositions = {
-        'row0': null,
-        'row1': null,
-        'row2': null,
-        'row3': null,
+        'row0': 0,
+        'row1': 0,
+        'row2': 0,
+        'row3': 0,
     };
 
     function setLastPosition(event){
         const departingFromRow = event.target.parentNode.getAttribute("data-row");
         const departingFromCol = event.target.parentNode.getAttribute("data-col");
         lastPositions[`row${departingFromRow}`] = departingFromCol;
+        activeCol = lastPositions[`row${activeRow}`];
     }
     
     // Set active cell
@@ -39,15 +40,15 @@ export function addKeyboardNavigation(){
             case 'ArrowUp':
                 event.preventDefault();
                 if (activeRow > 0) {
-                    setLastPosition(event);
                     activeRow--;
+                    setLastPosition(event);
                 }
                 break;
             case 'ArrowDown':
                 event.preventDefault();
                 if (activeRow < rowSize - 1) {
-                    setLastPosition(event);
                     activeRow++;
+                    setLastPosition(event);
                 }
                 break;
             case 'ArrowLeft':
